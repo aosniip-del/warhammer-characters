@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warhammer Character Profile</title>
+  <style>
+    body {
+      margin: 0;
+      background: #0a0a0a url('https://i.imgur.com/Yp1dM8y.png') no-repeat center/cover;
+      font-family: 'Cinzel', serif;
+      color: #e0d9c5;
+    }
+
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(3px);
+    }
+
+    .container {
+      position: relative;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px;
+    }
+
+    .title {
+      font-size: 48px;
+      text-align: center;
+      letter-spacing: 3px;
+      color: #d6c287;
+      text-shadow: 0 0 10px #5a3e11;
+      margin-bottom: 20px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 18px;
+      color: #b09e74;
+      margin-bottom: 40px;
+    }
+
+    .profile-grid {
+      display: grid;
+      grid-template-columns: 350px 1fr;
+      gap: 30px;
+    }
+
+    .portrait {
+      border: 3px solid #5b4a1e;
+      box-shadow: 0 0 15px #3a2c0f;
+    }
+
+    .card {
+      background: rgba(20, 20, 20, 0.85);
+      border: 1px solid #5b4a1e;
+      padding: 20px;
+      margin-bottom: 25px;
+    }
+
+    .card h2 {
+      border-bottom: 1px solid #5b4a1e;
+      padding-bottom: 8px;
+      margin-bottom: 15px;
+      color: #d6c287;
+    }
+
+    .data-table td {
+      padding: 6px 0;
+      border-bottom: 1px dashed #5b4a1e;
+    }
+
+    .timeline {
+      border-left: 2px solid #5b4a1e;
+      padding-left: 20px;
+      margin-left: 10px;
+    }
+
+    .timeline-item {
+      margin-bottom: 15px;
+    }
+
+    .quote {
+      font-style: italic;
+      border-left: 4px solid #8c6a2b;
+      padding-left: 10px;
+      margin-top: 15px;
+      opacity: 0.8;
+    }
+      /* --- NEW WARHAMMER FX --- */
+    /* Flickering holo text */
+    @keyframes flicker {
+      0% { opacity: 0.9; }
+      50% { opacity: 0.65; }
+      100% { opacity: 0.9; }
+    }
+
+    .title, .subtitle {
+      animation: flicker 2.8s infinite ease-in-out;
+    }
+
+    /* Noise overlay */
+    .noise-layer {
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      background: url('https://i.imgur.com/5lH3KqJ.png');
+      opacity: 0.07;
+      mix-blend-mode: screen;
+      animation: noiseMove 0.8s steps(4) infinite;
+    }
+
+    @keyframes noiseMove {
+      0% {transform: translate(0,0);}  
+      25% {transform: translate(20px,-10px);} 
+      50% {transform: translate(-10px,10px);} 
+      75% {transform: translate(-10px,-20px);} 
+      100% {transform: translate(0,0);} 
+    }
+
+    /* Scanlines */
+    .scanlines::before {
+      content: "";
+      pointer-events: none;
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.2) 0px,
+        rgba(0, 0, 0, 0.2) 2px,
+        rgba(0, 0, 0, 0) 3px,
+        rgba(0, 0, 0, 0) 6px
+      );
+      opacity: 0.3;
+    }
+
+    /* Glowing Borders */
+    .card, .portrait {
+      position: relative;
+    }
+
+    .card::after, .portrait::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 2px solid rgba(190, 160, 80, 0.25);
+      filter: blur(3px);
+      opacity: 0.7;
+    }
+
+    /* Slight holographic distortion */
+    @keyframes distort {
+      0% { transform: translate(0); } 
+      50% { transform: translate(1px, -1px); } 
+      100% { transform: translate(0); }
+    }
+
+    .portrait {
+      animation: distort 2s infinite linear;
+    }
+      /* --- INQUISITION WARNING RUNES --- */
+    @keyframes runeGlow {
+      0% { opacity: 0.4; text-shadow: 0 0 4px #8b0000; }
+      50% { opacity: 1; text-shadow: 0 0 15px #ff1a1a; }
+      100% { opacity: 0.4; text-shadow: 0 0 4px #8b0000; }
+    }
+
+    .warning-runes {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      font-family: 'Cinzel', serif;
+      color: #ff2a2a;
+      font-size: 22px;
+      letter-spacing: 4px;
+      opacity: 0.85;
+      animation: runeGlow 3s infinite ease-in-out;
+      transform: rotate(8deg);
+      pointer-events: none;
+      z-index: 9999;
+    }
+  </style>
+</head>
+<body class="scanlines" class="scanlines">
+  <div class="noise-layer"></div>
+  <div class="overlay"></div>
+  <div class="warning-runes">⚠ LEX IMPERATORIS VIGILAT ⚠</div>
+  <div class="container">
+    <div class="title">ИНКВИЗИТОР МАРКОС ВЕСТАН</div>
+    <div class="subtitle">Ordo Malleus • Imperium of Man</div>
+
+    <div class="profile-grid">
+
+      <!-- Portrait -->
+      <img class="portrait" src="https://i.imgur.com/EE1z6tY.jpeg" width="350" />
+
+      <div class="details">
+        <!-- Summary -->
+        <div class="card">
+          <h2>Краткая Сводка</h2>
+          <table class="data-table" width="100%">
+            <tr><td><b>Фракция</b></td><td>Империум</td></tr>
+            <tr><td><b>Роль</b></td><td>Инквизитор Ордос Маллеус</td></tr>
+            <tr><td><b>Планета</b></td><td>Гелиос-IX</td></tr>
+            <tr><td><b>Статус</b></td><td>Активен</td></tr>
+          </table>
+        </div>
+
+        <!-- Lore -->
+        <div class="card">
+          <h2>Лор-Описание</h2>
+          Маркос Вестан — один из самых безжалостных охотников на демонов и культистов Хаоса. Его методы
+          вызывают страх не только у врагов Империума, но и среди собственных союзников.
+          <div class="quote">“Страх — это костыль. Вера — наше оружие.”</div>
+        </div>
+
+        <!-- Abilities -->
+        <div class="card">
+          <h2>Способности</h2>
+          — Экзорцистический пси-импульс<br>
+          — Молот Византария (артефактный вархаммер)<br>
+          — Допрос в состоянии нейро-шторма<br>
+        </div>
+
+        <!-- Timeline -->
+        <div class="card">
+          <h2>Хронология</h2>
+          <div class="timeline">
+            <div class="timeline-item"><b>743.M41</b> — вступление в Инквизицию</div>
+            <div class="timeline-item"><b>748.M41</b> — раскрытие культа «Семя Кровавой Луны»</div>
+            <div class="timeline-item"><b>755.M41</b> — сожжение планеты Лира-7</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
